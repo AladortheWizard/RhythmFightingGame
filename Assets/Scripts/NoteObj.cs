@@ -17,29 +17,18 @@ public class NoteObj : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        foreach (KeyCode key in GameManager.instance.keys)
+    { 
+        if (canBePressed == true)
         {
-            if (Input.GetKeyDown(key))
-            {
-                if (canBePressed)
-                {
-                    canBePressed = false;
-                    pressedPublic = false;
-                    gameObject.SetActive(false);
-
-                    GameManager.instance.noteHit();
-                    break;
-
-                }
-            }
+            pressedPublic = true;
         }
+        StartCoroutine(checkForDeletion());
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Activator")
+        if (collision.CompareTag("Activator"))
         {
             canBePressed = true;
             pressedPublic = true;
@@ -50,7 +39,7 @@ public class NoteObj : MonoBehaviour
     {
         if (canBePressed)
         {
-            if (collision.tag == "Activator")
+            if (collision.CompareTag("Activator"))
             {
                 canBePressed = false;
                 pressedPublic = false;
@@ -59,6 +48,27 @@ public class NoteObj : MonoBehaviour
                 gameObject.SetActive(false);
 
 
+            }
+        }
+    }
+
+    IEnumerator checkForDeletion()
+    {
+        foreach (KeyCode key in GameManager.instance.keys)
+        {
+            if (Input.GetKeyDown(key))
+            {
+                if (canBePressed)
+                {
+                    yield return new WaitForSeconds(0.1f);
+                    canBePressed = false;
+                    pressedPublic = false;
+                    gameObject.SetActive(false);
+
+                    GameManager.instance.noteHit();
+                    break;
+
+                }
             }
         }
     }

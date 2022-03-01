@@ -30,8 +30,10 @@ public class ComboManagerP2 : MonoBehaviour
         {
             if (Input.GetKeyDown(key))
             {
-                if (NoteObj.pressedPublic)
+                Debug.Log(NoteObj.pressedPublic.ToString());
+                if (NoteObj.pressedPublic == true)
                 {
+                    Debug.Log("pressedpublic");
                     if (Input.GetKeyDown(KeyCode.Z))
                     {
                         animator.Play("Kick");
