@@ -13,7 +13,7 @@ public class ComboManagerP2 : MonoBehaviour
     Animator animator = new Animator();
 
     public List<string> MegaCombos = new List<string>();
-    List<KeyCode> cache = new List<KeyCode>();
+   public List<KeyCode> cache = new List<KeyCode>();
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +56,22 @@ public class ComboManagerP2 : MonoBehaviour
                         animator.Play("Gash");
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
 
+                    }
+
+                    if (cache.Contains(KeyCode.Z) && cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.T))
+                    {
+                        animator.Play("Spear");
+                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                        MegaCombos.Add("upZX");
+                        cache.Clear();
+                    }
+
+                    if (cache.Contains(KeyCode.Z) && cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.G))
+                    {
+                        animator.Play("Spike");
+                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                        MegaCombos.Add("downZX");
+                        cache.Clear();
                     }
 
                     if (cache.Contains(KeyCode.Z) && Input.GetKeyDown(KeyCode.T))
@@ -106,21 +122,6 @@ public class ComboManagerP2 : MonoBehaviour
                         cache.Clear();
                     }
 
-                    if (cache.Contains(KeyCode.Z) && cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.T))
-                    {
-                        animator.Play("Spear");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                        MegaCombos.Add("upZX");
-                        cache.Clear();
-                    }
-
-                    if (cache.Contains(KeyCode.Z) && cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.G))
-                    {
-                        animator.Play("Spike");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                        MegaCombos.Add("downZX");
-                        cache.Clear();
-                    }
                 }
 
 
