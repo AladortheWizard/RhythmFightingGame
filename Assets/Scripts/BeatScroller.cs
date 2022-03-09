@@ -32,7 +32,7 @@ public class BeatScroller : MonoBehaviour
         {
             songPos += tempo * Time.deltaTime;
 
-            posBeats = songPos; 
+            posBeats = Mathf.Round(songPos * 1f) / 1f;
             transform.position += new Vector3(tempo * Time.deltaTime, 0f , 0f);
             
         }

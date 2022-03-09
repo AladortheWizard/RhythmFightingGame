@@ -18,6 +18,9 @@ public class ComboManagerP2 : MonoBehaviour
     public GameObject healthbar;
     public string state;
     public float stun;
+    public float stunCache;
+    public float stunDuration;
+    bool isStunned;
 
     AnimatorClipInfo[] clipInfos;
 
@@ -36,137 +39,153 @@ public class ComboManagerP2 : MonoBehaviour
 
         if (stun > 0)
         {
-            float temp = BeatScroller.posBeats;
-            do
-            {
-                cache.Clear();
-                animator.Play("Miss");
-                Debug.Log(BeatScroller.posBeats != temp);
-            } while (BeatScroller.posBeats != BeatScroller.posBeats + temp);
+            isStunned = true;
+            StartCoroutine(Stun());
+        }
 
+        if (BeatScroller.posBeats == stunDuration)
+        { 
+            isStunned = false;
+            stunCache = 0;
+            stunDuration = 0;
+        }
 
-            stun = 0;
+        if (isStunned == true)
+        {
+            animator.Play("Miss");
         }
 
         foreach (KeyCode key in keyToPress)
         {
-            if (Input.GetKeyDown(key))
+            if (isStunned == false)
             {
-               
-                if (NoteObj.pressedPublic == true)
+
+                if (Input.GetKeyDown(key))
                 {
-                    
-                    if (Input.GetKeyDown(KeyCode.Z))
+
+                    if (NoteObj.pressedPublic == true)
                     {
-                        animator.Play("Kick");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                        cache.Add(KeyCode.Z);
-                        state = "neutral";
-                        InteractionsManager.DoDamage(5, "neutral", 0, healthbar, "p2");
+
+                        if (Input.GetKeyDown(KeyCode.Z))
+                        {
+                            animator.Play("Kick");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            cache.Add(KeyCode.Z);
+                            state = "neutral";
+                            InteractionsManager.DoDamage(1, "neutral", 0, healthbar, "p2", false);
+                        }
+
+
+                        if (Input.GetKeyDown(KeyCode.X))
+                        {
+                            animator.Play("Punch");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            cache.Add(KeyCode.X);
+                            state = "neutral";
+                            InteractionsManager.DoDamage(1, "neutral", 0, healthbar, "p2", false);
+                        }
+
+                        if (Input.GetKeyDown(KeyCode.Z) && Input.GetKeyDown(KeyCode.X))
+                        {
+                            animator.Play("Gash");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            state = "stun";
+                            InteractionsManager.DoDamage(40, "neutral", 2, healthbar, "p2", true);
+                        }
+
+                        if (cache.Contains(KeyCode.Z) && cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.T))
+                        {
+                            animator.Play("Spear");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            MegaCombos.Add("upZX");
+                            cache.Clear();
+                            state = "stun";
+                            InteractionsManager.DoDamage(40, "air", 2, healthbar, "p2", true);
+                        }
+
+                        if (cache.Contains(KeyCode.Z) && cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.G))
+                        {
+                            animator.Play("Spike");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            MegaCombos.Add("downZX");
+                            cache.Clear();
+                            state = "stun";
+                            InteractionsManager.DoDamage(40, "ground", 2, healthbar, "p2", true);
+                        }
+
+                        if (cache.Contains(KeyCode.Z) && Input.GetKeyDown(KeyCode.T))
+                        {
+                            animator.Play("CraneKick");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            MegaCombos.Add("upZ");
+                            cache.Clear();
+                            state = "air";
+                            InteractionsManager.DoDamage(70, "air", 0, healthbar, "p2", false);
+                        }
+
+                        if (cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.T))
+                        {
+                            animator.Play("LadderPunch");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            MegaCombos.Add("upX");
+                            cache.Clear();
+                            state = "air";
+                            InteractionsManager.DoDamage(11, "air", 0, healthbar, "p2", false);
+                        }
+
+                        if (cache.Contains(KeyCode.Z) && Input.GetKeyDown(KeyCode.G))
+                        {
+                            animator.Play("LegSweep");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6739271f);
+                            MegaCombos.Add("downZ");
+                            cache.Clear();
+                            state = "ground";
+                            InteractionsManager.DoDamage(12, "ground", 0, healthbar, "p2", false);
+                        }
+
+                        if (cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.G))
+                        {
+                            animator.Play("GroundedPunch");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            MegaCombos.Add("downX");
+                            cache.Clear();
+                            state = "ground";
+                            InteractionsManager.DoDamage(12, "ground", 0, healthbar, "p2", false);
+                        }
+
+                        if (cache.Contains(KeyCode.Z) && Input.GetKeyDown(KeyCode.H))
+                        {
+                            animator.Play("RoundhouseKick");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            MegaCombos.Add("sideZ");
+                            cache.Clear();
+                            state = "neutral";
+                            InteractionsManager.DoDamage(14, "neutral", 0, healthbar, "p2", false);
+                        }
+
+                        if (cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.H))
+                        {
+                            animator.Play("DoublePunch");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            MegaCombos.Add("sideX");
+                            cache.Clear();
+                            state = "neutral";
+                            InteractionsManager.DoDamage(15, "neutral", 0, healthbar, "p2", false);
+                        }
+
                     }
 
 
-                    if (Input.GetKeyDown(KeyCode.X))
+
+                    //Miss Graphic
+                    else
                     {
-                        animator.Play("Punch");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                        cache.Add(KeyCode.X);
-                        state = "neutral";
-                        InteractionsManager.DoDamage(5, "neutral", 0, healthbar, "p2");
+                        animator.Play("Miss");
                     }
 
-                    if (Input.GetKeyDown(KeyCode.Z) && Input.GetKeyDown(KeyCode.X))
-                    {
-                        animator.Play("Gash");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                        state = "stun";
-                    }
-
-                    if (cache.Contains(KeyCode.Z) && cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.T))
-                    {
-                        animator.Play("Spear");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                        MegaCombos.Add("upZX");
-                        cache.Clear();
-                        state = "stun";
-                    }
-
-                    if (cache.Contains(KeyCode.Z) && cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.G))
-                    {
-                        animator.Play("Spike");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                        MegaCombos.Add("downZX");
-                        cache.Clear();
-                        state = "stun";
-                    }
-
-                    if (cache.Contains(KeyCode.Z) && Input.GetKeyDown(KeyCode.T))
-                    {
-                        animator.Play("CraneKick");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                        MegaCombos.Add("upZ");
-                        cache.Clear();
-                        state = "air";
-                        InteractionsManager.DoDamage(5, "air", 0, healthbar, "p2");
-                    }
-
-                    if (cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.T))
-                    {
-                        animator.Play("LadderPunch");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                        MegaCombos.Add("upX");
-                        cache.Clear();
-                        state = "air";
-                    }
-
-                    if (cache.Contains(KeyCode.Z) && Input.GetKeyDown(KeyCode.G))
-                    {
-                        animator.Play("LegSweep");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6739271f);
-                        MegaCombos.Add("downZ");
-                        cache.Clear();
-                        state = "ground";
-                    }
-
-                    if (cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.G))
-                    {
-                        animator.Play("GroundedPunch");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                        MegaCombos.Add("downX");
-                        cache.Clear();
-                        state = "ground";
-                    }
-
-                    if (cache.Contains(KeyCode.Z) && Input.GetKeyDown(KeyCode.H))
-                    {
-                        animator.Play("RoundhouseKick");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                        MegaCombos.Add("sideZ");
-                        cache.Clear();
-                        state = "neutral";
-                    }
-
-                    if (cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.H))
-                    {
-                        animator.Play("DoublePunch");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                        MegaCombos.Add("sideX");
-                        cache.Clear();
-                        state = "neutral";
-                    }
-
-                }
-
-
-
-                //Miss Graphic
-                else
-                {
-                    animator.Play("Miss");
                 }
 
             }
-
         }
         //Mega Combos
 
@@ -182,6 +201,7 @@ public class ComboManagerP2 : MonoBehaviour
                         animator.Play("Spin");
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Clear();
+                        InteractionsManager.DoDamage(25, "neutral", 0, healthbar, "p2", false);
                     }
                 }
             }
@@ -197,6 +217,7 @@ public class ComboManagerP2 : MonoBehaviour
                     animator.Play("Flip");
                     gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                     MegaCombos.Clear();
+                    InteractionsManager.DoDamage(20, "air", 0, healthbar, "p2", false);
                 }
             }
         }
@@ -214,6 +235,7 @@ public class ComboManagerP2 : MonoBehaviour
                         animator.Play("CurvePunch");
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Clear();
+                        InteractionsManager.DoDamage(23, "aor", 0, healthbar, "p2", false);
                     }
                 }
             }
@@ -224,6 +246,16 @@ public class ComboManagerP2 : MonoBehaviour
             state = "neutral";
         }
 
+    }
+
+    IEnumerator Stun()
+    {
+        stunCache = BeatScroller.posBeats;
+        Debug.Log(BeatScroller.posBeats);
+        stunDuration = stunCache + stun;
+        Debug.Log(stunDuration);
+        stun = 0;
+        yield return null;
     }
 }
 
