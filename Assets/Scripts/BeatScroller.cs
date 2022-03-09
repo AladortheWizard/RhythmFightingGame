@@ -15,28 +15,26 @@ public class BeatScroller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tempo = tempo / 60f;
-        dspSongTime = (float)AudioSettings.dspTime;
+        tempo /= 60f;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        songPos = (float)(AudioSettings.dspTime - dspSongTime);
-
-        posBeats = songPos / tempo;
-        posBeats = Mathf.Round(posBeats * 10f) / 10f;
+        
 
         if (!hasStarted)
         {
-            /*if (Input.anyKeyDown)
-            {
-                hasStarted = true;
-            }*/
+            dspSongTime = 0;
         }
         else
         {
+            songPos += tempo * Time.deltaTime;
+
+            posBeats = songPos; 
             transform.position += new Vector3(tempo * Time.deltaTime, 0f , 0f);
+            
         }
         
     }

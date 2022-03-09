@@ -16,7 +16,11 @@ public class ComboManager : MonoBehaviour
     List<KeyCode> cache = new List<KeyCode>();
 
     public string state;
+    public float stun = 0;
 
+    public GameObject healthbar;
+
+    AnimatorClipInfo[] clipInfos;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,18 +32,31 @@ public class ComboManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        clipInfos = animator.GetCurrentAnimatorClipInfo(0);
+        if (stun > 0)
+        {
+            float temp = BeatScroller.posBeats;
+            do
+            {
+                cache.Clear();
+                animator.Play("Miss");
+            } while (BeatScroller.posBeats != temp + stun);
+        }
+
         foreach (KeyCode key in keyToPress)
         {
             if (Input.GetKeyDown(key))
-            { 
+            {
                 if (NoteObj.pressedPublic)
-                { 
+                {
                     if (Input.GetKeyDown(KeyCode.Comma))
                     {
                         animator.Play("Kick");
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         cache.Add(KeyCode.Comma);
                         state = "neutral";
+                        InteractionsManager.DoDamage(0, "neutral", 2, healthbar, "p1");
                     }
 
 
@@ -55,7 +72,7 @@ public class ComboManager : MonoBehaviour
                     {
                         animator.Play("Gash");
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-
+                        state = "stun";
                     }
 
 
@@ -65,7 +82,7 @@ public class ComboManager : MonoBehaviour
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Add("upCommaPeriod");
                         cache.Clear();
-
+                        state = "stun";
                     }
 
                     if (cache.Contains(KeyCode.Comma) && cache.Contains(KeyCode.Period) && Input.GetKeyDown(KeyCode.DownArrow))
@@ -74,6 +91,7 @@ public class ComboManager : MonoBehaviour
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Add("downCommaPeriod");
                         cache.Clear();
+                        state = "stun";
                     }
                     if (cache.Contains(KeyCode.Comma) && Input.GetKeyDown(KeyCode.UpArrow))
                     {
@@ -117,7 +135,7 @@ public class ComboManager : MonoBehaviour
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Add("sideComma");
                         cache.Clear();
-                        state = "ground";
+                        state = "neutral";
                     }
 
                     if (cache.Contains(KeyCode.Period) && Input.GetKeyDown(KeyCode.LeftArrow))
@@ -126,7 +144,7 @@ public class ComboManager : MonoBehaviour
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Add("sidePeriod");
                         cache.Clear();
-                        state = "ground";
+                        state = "neutral";
                     }
                 }
 
@@ -135,31 +153,31 @@ public class ComboManager : MonoBehaviour
                 else
                 {
                     animator.Play("Miss");
-                    state = "neutral";
-                }
 
                 }
+
             }
+        }
 
-        
-            //Mega Combos
-            
+
+        //Mega Combos
+
         //Spin
-            if (MegaCombos.IndexOf("upPeriod") == 0)
+        if (MegaCombos.IndexOf("upPeriod") == 0)
+        {
+            if (MegaCombos.IndexOf("sideComma") == 1)
             {
-                if (MegaCombos.IndexOf("sideComma") == 1)
+                if (MegaCombos.IndexOf("downComma") == 2)
                 {
-                    if (MegaCombos.IndexOf("downComma") == 2)
+                    if (MegaCombos.IndexOf("sidePeriod") == 3)
                     {
-                        if (MegaCombos.IndexOf("sidePeriod") == 3)
-                        {
-                            animator.Play("Spin");
-                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                            MegaCombos.Clear();
-                        }
+                        animator.Play("Spin");
+                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                        MegaCombos.Clear();
                     }
                 }
             }
+        }
 
         //Flip
         if (MegaCombos.IndexOf("downComma") == 0)
@@ -168,8 +186,8 @@ public class ComboManager : MonoBehaviour
             {
                 if (MegaCombos.IndexOf("upComma") == 2)
                 {
-                        animator.Play("Flip");
-                        gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                    animator.Play("Flip");
+                    gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                     MegaCombos.Clear();
                 }
             }
@@ -192,17 +210,11 @@ public class ComboManager : MonoBehaviour
                 }
             }
         }
-    }
 
-    [S] static IEnumerator Stun(float stunDuration)
-    {
-        float temp = BeatScroller.posBeats;
-        do
+        if (clipInfos[0].clip.name == "Idle")
         {
-            cache.Clear();
-            animator.Play("Miss");
-        } while (BeatScroller.posBeats != temp + stunDuration);
-        yield return null;
+            state = "neutral";
+        }
     }
 }
 

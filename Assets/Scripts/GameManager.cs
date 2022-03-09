@@ -37,13 +37,13 @@ public class GameManager : MonoBehaviour
     }
         public void noteHit()
         {
-        Debug.Log("Hit Note");
+       
         score += scorePerNote;
         }
 
         public void noteMiss()
     {
-        Debug.Log("Note Miss");
+        
     }
     }
 

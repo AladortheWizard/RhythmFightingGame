@@ -15,6 +15,12 @@ public class ComboManagerP2 : MonoBehaviour
     public List<string> MegaCombos = new List<string>();
    public List<KeyCode> cache = new List<KeyCode>();
 
+    public GameObject healthbar;
+    public string state;
+    public float stun;
+
+    AnimatorClipInfo[] clipInfos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,20 +32,37 @@ public class ComboManagerP2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        clipInfos = animator.GetCurrentAnimatorClipInfo(0);
+
+        if (stun > 0)
+        {
+            float temp = BeatScroller.posBeats;
+            do
+            {
+                cache.Clear();
+                animator.Play("Miss");
+                Debug.Log(BeatScroller.posBeats != temp);
+            } while (BeatScroller.posBeats != BeatScroller.posBeats + temp);
+
+
+            stun = 0;
+        }
+
         foreach (KeyCode key in keyToPress)
         {
             if (Input.GetKeyDown(key))
             {
-                Debug.Log(NoteObj.pressedPublic.ToString());
+               
                 if (NoteObj.pressedPublic == true)
                 {
-                    Debug.Log("pressedpublic");
+                    
                     if (Input.GetKeyDown(KeyCode.Z))
                     {
                         animator.Play("Kick");
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         cache.Add(KeyCode.Z);
-
+                        state = "neutral";
+                        InteractionsManager.DoDamage(5, "neutral", 0, healthbar, "p2");
                     }
 
 
@@ -48,14 +71,15 @@ public class ComboManagerP2 : MonoBehaviour
                         animator.Play("Punch");
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         cache.Add(KeyCode.X);
-
+                        state = "neutral";
+                        InteractionsManager.DoDamage(5, "neutral", 0, healthbar, "p2");
                     }
 
                     if (Input.GetKeyDown(KeyCode.Z) && Input.GetKeyDown(KeyCode.X))
                     {
                         animator.Play("Gash");
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-
+                        state = "stun";
                     }
 
                     if (cache.Contains(KeyCode.Z) && cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.T))
@@ -64,6 +88,7 @@ public class ComboManagerP2 : MonoBehaviour
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Add("upZX");
                         cache.Clear();
+                        state = "stun";
                     }
 
                     if (cache.Contains(KeyCode.Z) && cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.G))
@@ -72,6 +97,7 @@ public class ComboManagerP2 : MonoBehaviour
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Add("downZX");
                         cache.Clear();
+                        state = "stun";
                     }
 
                     if (cache.Contains(KeyCode.Z) && Input.GetKeyDown(KeyCode.T))
@@ -80,6 +106,8 @@ public class ComboManagerP2 : MonoBehaviour
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Add("upZ");
                         cache.Clear();
+                        state = "air";
+                        InteractionsManager.DoDamage(5, "air", 0, healthbar, "p2");
                     }
 
                     if (cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.T))
@@ -88,6 +116,7 @@ public class ComboManagerP2 : MonoBehaviour
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Add("upX");
                         cache.Clear();
+                        state = "air";
                     }
 
                     if (cache.Contains(KeyCode.Z) && Input.GetKeyDown(KeyCode.G))
@@ -96,6 +125,7 @@ public class ComboManagerP2 : MonoBehaviour
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6739271f);
                         MegaCombos.Add("downZ");
                         cache.Clear();
+                        state = "ground";
                     }
 
                     if (cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.G))
@@ -104,6 +134,7 @@ public class ComboManagerP2 : MonoBehaviour
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Add("downX");
                         cache.Clear();
+                        state = "ground";
                     }
 
                     if (cache.Contains(KeyCode.Z) && Input.GetKeyDown(KeyCode.H))
@@ -112,6 +143,7 @@ public class ComboManagerP2 : MonoBehaviour
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Add("sideZ");
                         cache.Clear();
+                        state = "neutral";
                     }
 
                     if (cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.H))
@@ -120,9 +152,11 @@ public class ComboManagerP2 : MonoBehaviour
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Add("sideX");
                         cache.Clear();
+                        state = "neutral";
                     }
 
                 }
+
 
 
                 //Miss Graphic
@@ -132,9 +166,8 @@ public class ComboManagerP2 : MonoBehaviour
                 }
 
             }
+
         }
-
-
         //Mega Combos
 
         //Spin
@@ -186,9 +219,10 @@ public class ComboManagerP2 : MonoBehaviour
             }
         }
 
-
-
-
+        if (clipInfos[0].clip.name == "Idle")
+        {
+            state = "neutral";
+        }
 
     }
 }
