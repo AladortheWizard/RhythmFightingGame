@@ -85,6 +85,22 @@ public class ComboManagerP2 : MonoBehaviour
                             InteractionsManager.DoDamage(1, "neutral", 0, healthbar, "p2", false);
                         }
 
+                        if (Input.GetKeyDown(KeyCode.G))
+                        {
+                           
+                            animator.Play("Crouch");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            state = "ground";
+                        }
+
+                        if (Input.GetKeyDown(KeyCode.T))
+                        {
+                            
+                            animator.Play("Jump");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            state = "air";
+                        }
+
                         if (Input.GetKeyDown(KeyCode.Z) && Input.GetKeyDown(KeyCode.X))
                         {
                             animator.Play("Gash");
@@ -120,7 +136,7 @@ public class ComboManagerP2 : MonoBehaviour
                             MegaCombos.Add("upZ");
                             cache.Clear();
                             state = "air";
-                            InteractionsManager.DoDamage(70, "air", 0, healthbar, "p2", false);
+                            InteractionsManager.DoDamage(10, "air", 0, healthbar, "p2", false);
                         }
 
                         if (cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.T))
