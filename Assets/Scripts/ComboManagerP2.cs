@@ -35,6 +35,8 @@ public class ComboManagerP2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(state);
+
         clipInfos = animator.GetCurrentAnimatorClipInfo(0);
 
         if (stun > 0)
@@ -96,9 +98,10 @@ public class ComboManagerP2 : MonoBehaviour
                         if (Input.GetKeyDown(KeyCode.T))
                         {
                             
-                            animator.Play("Jump");
-                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            await animator.Play("Jump");
                             state = "air";
+                           gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            
                         }
 
                         if (Input.GetKeyDown(KeyCode.Z) && Input.GetKeyDown(KeyCode.X))

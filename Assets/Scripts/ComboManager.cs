@@ -90,6 +90,22 @@ public class ComboManager : MonoBehaviour
                         }
 
 
+                        if (Input.GetKeyDown(KeyCode.DownArrow))
+                        {
+
+                            animator.Play("Crouch");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            state = "ground";
+                        }
+
+                        if (Input.GetKeyDown(KeyCode.UpArrow))
+                        {
+
+                            animator.Play("Jump");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+                            state = "air";
+                        }
+
                         if (cache.Contains(KeyCode.Comma) && cache.Contains(KeyCode.Period) && Input.GetKeyDown(KeyCode.UpArrow))
                         {
                             animator.Play("Spear");
