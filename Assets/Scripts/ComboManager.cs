@@ -252,11 +252,6 @@ public class ComboManager : MonoBehaviour
                 }
             }
         }
-
-        if (clipInfos[0].clip.name == "Idle")
-        {
-            state = "neutral";
-        }
     }
 
     IEnumerator Stun()

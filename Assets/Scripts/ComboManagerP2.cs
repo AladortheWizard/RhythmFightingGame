@@ -22,8 +22,6 @@ public class ComboManagerP2 : MonoBehaviour
     public float stunDuration;
     bool isStunned;
 
-    AnimatorClipInfo[] clipInfos;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -36,8 +34,7 @@ public class ComboManagerP2 : MonoBehaviour
     void Update()
     {
         Debug.Log(state);
-
-        clipInfos = animator.GetCurrentAnimatorClipInfo(0);
+ 
 
         if (stun > 0)
         {
@@ -57,17 +54,16 @@ public class ComboManagerP2 : MonoBehaviour
             animator.Play("Miss");
         }
 
+        
+
         foreach (KeyCode key in keyToPress)
         {
             if (isStunned == false)
             {
-
-                if (Input.GetKeyDown(key))
+                if (NoteObj.pressedPublic == true)
                 {
-
-                    if (NoteObj.pressedPublic == true)
+                    if (Input.GetKeyDown(key))
                     {
-
                         if (Input.GetKeyDown(KeyCode.Z))
                         {
                             animator.Play("Kick");
@@ -89,7 +85,7 @@ public class ComboManagerP2 : MonoBehaviour
 
                         if (Input.GetKeyDown(KeyCode.G))
                         {
-                           
+
                             animator.Play("Crouch");
                             gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                             state = "ground";
@@ -97,11 +93,11 @@ public class ComboManagerP2 : MonoBehaviour
 
                         if (Input.GetKeyDown(KeyCode.T))
                         {
-                            
-                            await animator.Play("Jump");
                             state = "air";
-                           gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
-                            
+                            animator.Play("Jump");
+                            gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
+
+
                         }
 
                         if (Input.GetKeyDown(KeyCode.Z) && Input.GetKeyDown(KeyCode.X))
@@ -191,16 +187,18 @@ public class ComboManagerP2 : MonoBehaviour
                             state = "neutral";
                             InteractionsManager.DoDamage(15, "neutral", 0, healthbar, "p2", false);
                         }
-
                     }
 
-
-
-                    //Miss Graphic
                     else
                     {
-                        animator.Play("Miss");
+                        state = "neutral";
                     }
+                }
+
+                //Miss Graphic
+                if (Input.GetKeyDown(key) && NoteObj.pressedPublic == false)
+                {
+                    animator.Play("Miss");
 
                 }
 
@@ -260,10 +258,6 @@ public class ComboManagerP2 : MonoBehaviour
             }
         }
 
-        if (clipInfos[0].clip.name == "Idle")
-        {
-            state = "neutral";
-        }
 
     }
 
@@ -276,5 +270,7 @@ public class ComboManagerP2 : MonoBehaviour
         stun = 0;
         yield return null;
     }
+
+    
 }
 
