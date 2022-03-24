@@ -189,10 +189,7 @@ public class ComboManagerP2 : MonoBehaviour
                         }
                     }
 
-                    else
-                    {
-                        state = "neutral";
-                    }
+         
                 }
 
                 //Miss Graphic
@@ -271,6 +268,9 @@ public class ComboManagerP2 : MonoBehaviour
         yield return null;
     }
 
-    
+    public void SetState(string stateToSet)
+    {
+        state = stateToSet;
+    }
 }
 
