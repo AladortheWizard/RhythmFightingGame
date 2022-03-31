@@ -130,7 +130,8 @@ public class ComboManagerP2 : MonoBehaviour
 
                         if (cache.Contains(KeyCode.Z) && Input.GetKeyDown(KeyCode.T))
                         {
-                            animator.Play("CraneKick");
+                            animator.SetTrigger("CraneKick");
+                            animator.ResetTrigger("Jump");
                             gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                             MegaCombos.Add("upZ");
                             cache.Clear();
@@ -246,7 +247,7 @@ public class ComboManagerP2 : MonoBehaviour
                     if (MegaCombos.IndexOf("sideX") == 3)
                     {
 
-                        animator.Play("CurvePunch");
+                        animator.SetTrigger("CurvePunch");
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Clear();
                         InteractionsManager.DoDamage(23, "aor", 0, healthbar, "p2", false);
