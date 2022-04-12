@@ -93,8 +93,9 @@ public class ComboManagerP2 : MonoBehaviour
 
                         if (Input.GetKeyDown(KeyCode.T))
                         {
-                            state = "air";
+                            
                             animator.SetTrigger("Jump");
+                            state = "air";
                             gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
 
 

@@ -2197,7 +2197,7 @@ MonoBehaviour:
   keyToPress: 1101000012010000140100002c0000002e000000
   MegaCombos: []
   healthbar: {fileID: 1806184432}
-  state: 
+  state: neutral
   stun: 0
   stunCache: 0
   stunDuration: 0

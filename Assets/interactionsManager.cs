@@ -41,7 +41,7 @@ public class InteractionsManager : MonoBehaviour
         {
              if (ComboManager.instance.state != "neutral" && strongAgainst == "neutral")
             {
-
+                
             }
             else if (ComboManager.instance.state != "stun" && strongAgainst == "stun")
             {
