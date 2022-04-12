@@ -86,7 +86,7 @@ public class ComboManagerP2 : MonoBehaviour
                         if (Input.GetKeyDown(KeyCode.G))
                         {
 
-                            animator.Play("Crouch");
+                            animator.SetTrigger("Crouch");
                             gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                             state = "ground";
                         }
@@ -162,7 +162,8 @@ public class ComboManagerP2 : MonoBehaviour
 
                         if (cache.Contains(KeyCode.X) && Input.GetKeyDown(KeyCode.G))
                         {
-                            animator.Play("GroundedPunch");
+                            animator.ResetTrigger("Crouch");
+                            animator.SetTrigger("GroundedPunch");
                             gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                             MegaCombos.Add("downX");
                             cache.Clear();
@@ -214,7 +215,7 @@ public class ComboManagerP2 : MonoBehaviour
                 {
                     if (MegaCombos.IndexOf("sideX") == 3)
                     {
-                        animator.Play("Spin");
+                        animator.SetTrigger("Spin");
                         gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                         MegaCombos.Clear();
                         InteractionsManager.DoDamage(25, "neutral", 0, healthbar, "p2", false);
@@ -230,7 +231,7 @@ public class ComboManagerP2 : MonoBehaviour
             {
                 if (MegaCombos.IndexOf("upZ") == 2)
                 {
-                    animator.Play("Flip");
+                    animator.SetTrigger("Flip");
                     gameObject.transform.position = new Vector3(4.03f, -1.44f, -6.739271f);
                     MegaCombos.Clear();
                     InteractionsManager.DoDamage(20, "air", 0, healthbar, "p2", false);
