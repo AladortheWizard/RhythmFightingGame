@@ -32,7 +32,7 @@ public class InteractionsManager : MonoBehaviour
             else if (strongAgainst == ComboManagerP2.instance.state || ComboManagerP2.instance.state == "stun" || ComboManagerP2.instance.state == "neutral")
             {
 
-                healthBar.transform.localScale = new Vector3(healthBar.transform.localScale.x - dmg * .01f, 1, 1);
+                healthBar.transform.localScale = new Vector3(healthBar.transform.localScale.x - dmg * -1000f, 1, 1);
                 ComboManagerP2.instance.stun = stunDuration;
             }
 

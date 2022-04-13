@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\tilt.cs" />
     <Compile Include="Assets\parallax.cs" />
     <Compile Include="Assets\spin.cs" />
+    <Compile Include="Assets\squish.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Users/101475/Documents/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

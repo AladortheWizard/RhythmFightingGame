@@ -65,7 +65,7 @@ public class Conductor : MonoBehaviour
         float time = 0;
         while (time < duration)
         {
-            rect.localPosition = new Vector3(-217, Mathf.Lerp(-450, 131, time), 0);
+            rect.localPosition = new Vector3(-83, Mathf.Lerp(-450, 56, time), 0);
             time+= 0.5f * Time.deltaTime;
             yield return null;
         }
