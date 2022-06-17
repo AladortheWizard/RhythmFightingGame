@@ -45,7 +45,7 @@ public class NoteObj : MonoBehaviour
                 pressedPublic = false;
 
                 GameManager.instance.noteMiss();
-                gameObject.SetActive(false);
+                gameObject.transform.position = new Vector3(-40, -4, -1.956277f);
 
 
             }
@@ -54,7 +54,7 @@ public class NoteObj : MonoBehaviour
 
     IEnumerator checkForDeletion()
     {
-        foreach (KeyCode key in GameManager.instance.keys)
+        foreach (KeyCode key in ComboManagerP2.instance.keyToPress)
         {
             if (Input.GetKeyDown(key))
             {

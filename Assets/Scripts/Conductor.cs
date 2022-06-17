@@ -14,9 +14,10 @@ public class Conductor : MonoBehaviour
     public GameObject text1;
     public GameObject text2;
     public GameObject text3;
-    public RectTransform rectTransform;
     public GameObject notes;
-
+    public GameObject play;
+    public GameObject bug;
+    public AudioSource audio;
     public float min = -450;
     public float max = 131;
 
@@ -33,6 +34,7 @@ public class Conductor : MonoBehaviour
         text2.SetActive(false);
 
         instance = this;
+        
     }
 
     // Update is called once per frame
@@ -55,18 +57,23 @@ public class Conductor : MonoBehaviour
             text2.SetActive(false);
             text3.SetActive(true);
             notes.SetActive(true);
-            StartCoroutine(Lerp(bpm * Time.deltaTime, rectTransform));
+            play.SetActive(true);
+            bug.SetActive(true);
+            StartCoroutine(Lerp((bpm + 30) * Time.deltaTime, text3.transform, -175.2f, -580, 113.7f, 0));
+            StartCoroutine(Lerp((bpm + 20) * Time.deltaTime, play.transform, -172.37f, -480, -113.28f, 0));
+            StartCoroutine(Lerp((bpm + 20) * Time.deltaTime, bug.transform, 120.22f, -480, -89.2f, 0));
+
         }
 
     }
 
-    IEnumerator Lerp(float duration, RectTransform rect)
+    IEnumerator Lerp(float duration, Transform rect, float x, float y, float y2, float z)
     {
         float time = 0;
         while (time < duration)
         {
-            rect.localPosition = new Vector3(-83, Mathf.Lerp(-450, 56, time), 0);
-            time+= 0.5f * Time.deltaTime;
+            rect.localPosition = new Vector3(x, Mathf.Lerp(y, y2, time), z);
+            time += 0.5f * Time.deltaTime;
             yield return null;
         }
 

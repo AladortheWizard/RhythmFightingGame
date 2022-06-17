@@ -7,8 +7,8 @@ public class BeatScroller : MonoBehaviour
 
     public float tempo;
     public bool hasStarted;
-
-    public float songPos;
+    public bool direction;
+    public static float songPos;
     public float dspSongTime;
     public static float posBeats;
 
@@ -33,8 +33,14 @@ public class BeatScroller : MonoBehaviour
             songPos += tempo * Time.deltaTime;
 
             posBeats = Mathf.Round(songPos * 1f) / 1f;
-            transform.position += new Vector3(tempo * Time.deltaTime, 0f , 0f);
-            
+            if (!direction)
+            {
+                transform.position += new Vector3(tempo * Time.deltaTime, 0f, 0f);
+            }
+            if (direction)
+            {
+                transform.position -= new Vector3(tempo * Time.deltaTime, 0f, 0f);
+            }
         }
         
     }

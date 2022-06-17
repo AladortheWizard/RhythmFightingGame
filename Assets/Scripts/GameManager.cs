@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public AudioSource music;
     public bool startPlaying;
     public BeatScroller scroller;
+    public ScrollerP2 scroller2;
     public static GameManager instance;
 
     public int score;
@@ -29,12 +30,31 @@ public class GameManager : MonoBehaviour
             if (Input.anyKeyDown)
             {
                 startPlaying = true;
+                scroller2.hasStarted = true;
                 scroller.hasStarted = true;
 
                 music.Play();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.T)){
+            ComboManagerP2.instance.state = "air";
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            ComboManagerP2.instance.state = "neutral";
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            ComboManager.instance.state = "air";
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            ComboManager.instance.state = "neutral";
+        }
     }
+
+        
         public void noteHit()
         {
        

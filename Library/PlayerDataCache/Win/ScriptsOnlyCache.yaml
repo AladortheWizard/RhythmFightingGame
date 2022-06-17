@@ -1,13 +1,23 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AudioFadeOut
     - BeatScroller
     - ButtonController
     - ComboManager
     - ComboManagerP2
+    - Conductor
     - GameManager
     - InteractionsManager
+    - LevelLoader
     - NoteObj
+    - NoteObj1
+    - ScrollerP2
+    - bug
+    - spin
+    - squish
+    - tilt
+    - winManager
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
@@ -28,6 +38,14 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
+    UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.Button
+    - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.Image
+    - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/SampleScene.unity:
     - Class: 1
@@ -63,20 +81,44 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 11264}
+    - Class: 114
+      Script: {instanceID: 11288}
+    - Class: 114
+      Script: {instanceID: 11578}
+    - Class: 114
       Script: {instanceID: 11822}
     - Class: 114
       Script: {instanceID: 12088}
     - Class: 114
-      Script: {instanceID: 13386}
+      Script: {instanceID: 12302}
     - Class: 114
-      Script: {instanceID: 13822}
+      Script: {instanceID: 12366}
     - Class: 114
-      Script: {instanceID: 14324}
+      Script: {instanceID: 12674}
     - Class: 114
-      Script: {instanceID: 14366}
+      Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 14388}
+      Script: {instanceID: 13394}
+    - Class: 114
+      Script: {instanceID: 13780}
+    - Class: 114
+      Script: {instanceID: 13830}
+    - Class: 114
+      Script: {instanceID: 13934}
+    - Class: 114
+      Script: {instanceID: 14336}
+    - Class: 114
+      Script: {instanceID: 14378}
+    - Class: 114
+      Script: {instanceID: 14400}
+    - Class: 114
+      Script: {instanceID: 14408}
+    - Class: 114
+      Script: {instanceID: 14466}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -86,7 +128,100 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
+    - Class: 221
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+    Assets/Scenes/Title.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11264}
+    - Class: 114
+      Script: {instanceID: 11288}
+    - Class: 114
+      Script: {instanceID: 11310}
+    - Class: 114
+      Script: {instanceID: 11578}
+    - Class: 114
+      Script: {instanceID: 12302}
+    - Class: 114
+      Script: {instanceID: 12366}
+    - Class: 114
+      Script: {instanceID: 12770}
+    - Class: 114
+      Script: {instanceID: 13002}
+    - Class: 114
+      Script: {instanceID: 13014}
+    - Class: 114
+      Script: {instanceID: 13780}
+    - Class: 114
+      Script: {instanceID: 13844}
+    - Class: 114
+      Script: {instanceID: 14182}
+    - Class: 114
+      Script: {instanceID: 14376}
+    - Class: 114
+      Script: {instanceID: 14408}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 221
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
   scriptHashData:
+  - hash:
+      serializedVersion: 2
+      Hash: 89f9a1b4c64db9559e39f4a2e3bfaadd
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Image
   - hash:
       serializedVersion: 2
       Hash: 4bc4346a71a8df53a6b106f68ef3a190
@@ -167,12 +302,6 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
-      Hash: 89f9a1b4c64db9559e39f4a2e3bfaadd
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: Image
-  - hash:
-      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
@@ -215,7 +344,7 @@ ScriptsOnlyBuild:
     className: SignalAsset
   - hash:
       serializedVersion: 2
-      Hash: efd3bf2e74b9719cc0ddd42248fe088b
+      Hash: 2f39862b3aa5c21a90a68d0245698bc6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ComboManager
@@ -281,7 +410,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 9c9e490a4fc806be89eaf504be9bf2a5
+      Hash: 277b83b2f15daead60c150e9852c07e2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ComboManagerP2
@@ -335,6 +464,12 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAsset
   - hash:
       serializedVersion: 2
+      Hash: 901b3a6ff8e74ed4b3e6bee88bad9cbc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AudioFadeOut
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -353,6 +488,12 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
+      Hash: ae0290b0365f4da2dcefa676aa4a6366
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: winManager
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -363,6 +504,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.U2D.Animation
     className: SpriteSkinEntity
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: bug
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -381,6 +528,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 364e3cd008459d079ce19ca42999b8d5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LevelLoader
   - hash:
       serializedVersion: 2
       Hash: 5f1752ed2092162f016c19510c28a8b9
@@ -455,7 +608,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: e56388b1d94aad7bfc8ff1d45db8a4d2
+      Hash: 830adebe7602e5f624f923c783f939c8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -495,6 +648,18 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ButtonController
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: squish
+  - hash:
+      serializedVersion: 2
+      Hash: 86b2ba2684554cb7f63f97a1ee279860
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: NoteObj1
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -581,7 +746,7 @@ ScriptsOnlyBuild:
     className: Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 64cd34f7b6b87f6976a13c9e37c30964
+      Hash: 6949a660f82956fc208ce302f7590e4e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Conductor
@@ -593,7 +758,7 @@ ScriptsOnlyBuild:
     className: InteractionsManager
   - hash:
       serializedVersion: 2
-      Hash: 3901e06d2e15dff008946aaf4ed38f69
+      Hash: d132640ba58e6b96903b40c7520f5923
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BeatScroller
@@ -623,6 +788,12 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
+      Hash: 5219a08a130b1eae30dc7c619e78d122
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ScrollerP2
+  - hash:
+      serializedVersion: 2
       Hash: 0fd6822f6177297bd0eb4d83cc7a9030
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -635,5 +806,6 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 5
   scenePathNames:
+  - Assets/Scenes/Title.unity
   - Assets/Scenes/SampleScene.unity
-  playerPath: D:/Unity/RhythmFightingGame/App/RhythmFightingGame.exe
+  playerPath: D:/Unity/RhythmFightingGame/App/DevBuild/RhythmFightingGame.exe

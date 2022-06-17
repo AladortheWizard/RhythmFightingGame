@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Spin Anim Controller
+  m_Controller: {fileID: 9100000, guid: b99b695dd7086b94fb0538d557d10c64, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: b43d6df99d4dc424baf9689a57e578c4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c692f2665ea71f54da6616d30fa239c2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9b6a3517d50eb5c46ba8cb0b02de6835, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: de5412a75aef6814cbeb3ec712c80d7c, type: 2}
