@@ -206,7 +206,7 @@ public class ComboManagerP2 : MonoBehaviour
                 //Miss Graphic
                 if (Input.GetKeyDown(key) && NoteObj.pressedPublic == false)
                 {
-                    animator.SetTrigger("Miss");
+                        stun = 2;
 
                 }
 

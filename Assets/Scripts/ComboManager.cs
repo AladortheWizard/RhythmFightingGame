@@ -20,7 +20,7 @@ public class ComboManager : MonoBehaviour
     public float stun;
     public float stunCache;
     public float stunDuration;
-    bool isStunned;
+    public bool isStunned;
 
     AnimatorClipInfo[] clipInfos;
     // Start is called before the first frame update
@@ -62,6 +62,7 @@ public class ComboManager : MonoBehaviour
             isStunned = false;
             stunCache = 0;
             stunDuration = 0;
+            animator.ResetTrigger("Miss");
         }
 
         if (isStunned == true)
@@ -195,7 +196,7 @@ public class ComboManager : MonoBehaviour
                     //Miss Graphic
                     else
                     {
-                        animator.Play("Miss");
+                        stun = 2;
 
                     }
 
@@ -264,8 +265,8 @@ public class ComboManager : MonoBehaviour
         stunCache = BeatScroller.posBeats;
         Debug.Log(BeatScroller.posBeats);
         stunDuration = stunCache + stun;
-        Debug.Log(stunDuration);
         stun = 0;
+        Debug.Log(stunDuration);
         yield return null;
     }
 }

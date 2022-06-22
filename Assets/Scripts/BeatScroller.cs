@@ -22,7 +22,6 @@ public class BeatScroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
         if (!hasStarted)
         {
