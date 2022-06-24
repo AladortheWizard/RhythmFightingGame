@@ -18,6 +18,7 @@ public class Conductor : MonoBehaviour
     public GameObject play;
     public GameObject bug;
     public AudioSource audio;
+    public GameObject controls;
     public float min = -450;
     public float max = 131;
 
@@ -60,8 +61,9 @@ public class Conductor : MonoBehaviour
             play.SetActive(true);
             bug.SetActive(true);
             StartCoroutine(Lerp((bpm + 30) * Time.deltaTime, text3.transform, -175.2f, -580, 113.7f, 0));
-            StartCoroutine(Lerp((bpm + 20) * Time.deltaTime, play.transform, -172.37f, -480, -113.28f, 0));
-            StartCoroutine(Lerp((bpm + 20) * Time.deltaTime, bug.transform, 120.22f, -480, -89.2f, 0));
+            StartCoroutine(Lerp((bpm + 20) * Time.deltaTime, play.transform, -301, -480, -113.28f, 0));
+            StartCoroutine(Lerp((bpm + 20) * Time.deltaTime, bug.transform, -91.2f, -480, -89.2f, 0));
+            StartCoroutine(Lerp((bpm + 20) * Time.deltaTime, controls.transform, 132.5f, -480, -113.28f, 0));
 
         }
 
